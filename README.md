@@ -1,6 +1,7 @@
 # Dự án I: Lập trình Android _(Updating)_
 
 - Tên dự án: Tìm Xe Bus
+- Ngôn ngữ: Kotlin
 - Chủ dự án: Phạm Sỹ Hưng
 - Mã sinh viên: PH04930
 
