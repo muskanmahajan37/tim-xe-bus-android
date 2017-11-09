@@ -57,6 +57,7 @@
 
 ## IV. Mockups
 _Sử dụng Balsamiq Mockups 3.5.15_
+
 Link file save mockups: [here](mocks/mockups.bmpr)
 
 ![Splash Screen](mocks/splash_screen.png)
