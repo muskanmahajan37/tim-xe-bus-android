@@ -56,7 +56,15 @@
 - [ ] Assets: icon, logo app, ảnh,...
 
 ## IV. Mockups
-_Coming soon_
+_Sử dụng Balsamiq Mockups 3.5.15_
+Link file save mockups: [here](mocks/mockups.bmpr)
+
+![Splash Screen](mocks/splash_screen.png)
+![Main Screen](mocks/main.png)
+![Sidebar](mocks/sidebar.png)
+![Search Screen](mocks/search.png)
+![Search Result Screen](mocks/search_result.png)
+![App Info Screen](mocks/app_info.png)
 
 ## V. Sản phẩm hoàn thiện
 _Coming soon_
