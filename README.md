@@ -67,5 +67,8 @@ Link file save mockups: [here](mocks/mockups.bmpr)
 ![Search Result Screen](mocks/search_result.png)
 ![App Info Screen](mocks/app_info.png)
 
+## V. Prototype
+![Prototype](mocks/prototype.png)
+
 ## V. Sản phẩm hoàn thiện
 _Coming soon_
