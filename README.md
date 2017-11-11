@@ -71,5 +71,5 @@ Link file save mockups: [here](mocks/mockups.bmpr)
 ## V. Prototype
 ![Prototype](mocks/prototype.png)
 
-## V. Sản phẩm hoàn thiện
+## VI. Sản phẩm hoàn thiện
 _Coming soon_
