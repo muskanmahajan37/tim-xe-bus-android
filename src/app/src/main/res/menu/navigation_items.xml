@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navBookmark"
+        android:icon="@drawable/ic_bookmark_border"
+        android:title="Chuyến Đã Lưu" />
+
+    <item
+        android:id="@+id/navSearch"
+        android:icon="@drawable/ic_search_blur"
+        android:title="Tra Cứu" />
+
+    <item
+        android:id="@+id/navAppInfo"
+        android:icon="@drawable/ic_info_outline"
+        android:title="Thông Tin Ứng Dụng" />
+
+</menu>
