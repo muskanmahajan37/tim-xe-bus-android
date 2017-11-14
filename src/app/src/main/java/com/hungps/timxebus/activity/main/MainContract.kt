@@ -10,6 +10,8 @@ interface MainContract {
 
     interface View : BaseMvpContract.View {
 
+        fun initToolbar()
+
     }
 
     interface Presenter : BaseMvpContract.Presenter<View> {
