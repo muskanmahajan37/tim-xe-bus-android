@@ -8,21 +8,21 @@
 ## I. Giao diện
 
 ### 1. Màn hình khởi động (Splash Screen)
-- [ ] Hiển thị logo, tiêu đề app
+- [x] Hiển thị logo
 
 ### 2. Màn hình chính (Tuyến đã lưu)
-- [ ] Thanh tiêu đề hiển thị icon app nhỏ và tên app
-- [ ] Hiển thị danh sách các tuyến xe bus đã lưu
+- [x] Thanh tiêu đề hiển thị tên app, menu drawer
+- [x] Hiển thị danh sách các tuyến xe bus đã lưu
 	- [ ] Trượt một tuyến sang bên phải sẽ hiển thị nút **xóa**
 	- [ ] Ấn chọn xóa sẽ hiển thị dialog confirm
 - [ ] Nút tìm kiếm (tra cứu) xe bus
-- [ ] Sidebar gồm các  sub-menu sau
-	- [ ] Tuyến đã lưu
-	- [ ] Tra cứu
-	- [ ] Thông tin ứng dụng
+- [x] Sidebar gồm các  sub-menu sau
+	- [x] Tuyến đã lưu
+	- [x] Tra cứu
+	- [x] Thông tin ứng dụng
 
 ### 3. Màn hình tra cứu 
-- [ ] Thanh tiêu đề hiển thị icon app nhỏ và tên app, nút back
+- [ ] Thanh tiêu đề hiển thị tên app, nút back
 - [ ] Form nhỏ chính giữa
 	- [ ] Ô nhập/chọn thành phố
 	- [ ] Ô nhập/chọn điểm đi
@@ -31,7 +31,7 @@
 - [ ] _\(Optional)_ hiển thị nút chuyển đổi giữa tra cứu bằng maps và bằng form nhập
 
 ### 4. Màn hình kết quả
-- [ ] Thanh tiêu đề hiển thị icon app nhỏ và tên app, nút back
+- [ ] Thanh tiêu đề hiển thị tên app, nút back
 - [ ] Hiển thị kết quả (các) lộ trình đi
 - [ ] Nút **Yêu thích**(Lưu/Đánh dấu)
 - [ ] _\(Optional)_ Ấn vào một lộ trình sẽ hiển thị bản đồ trực quan
@@ -48,13 +48,13 @@
 ## III. Cấu trúc ứng dụng 
 - Theo mô hình chuẩn MVP
 - [ ] Các model cần tạo:
-	- [ ] Tuyến đường ( nhánh nhỏ của một lộ trình ): Mã, thành phố, điểm đi, điểm đến
-	- [ ] Xe bus: Mã xe, Số xe, thành phố, lộ trình đi ( list các tuyến đường )
+	- [x] Tuyến đường ( nhánh nhỏ của một lộ trình ): Mã, thành phố, điểm đi, điểm đến
+	- [x] Xe bus: Mã xe, Số xe, thành phố, lộ trình đi ( list các tuyến đường )
 	- [ ] Quản lí xe bus : list các xe bus
 	- [ ] Danh sách đánh dấu : list các xe bus
 - [ ] Các adapter cho: danh sách tuyến đường, danh sách kết quả, danh sách đã lưu
 - [ ] Class Util chứa các phương thức hay dùng
-- [ ] Assets: icon, logo app, ảnh,...
+- [x] Assets: icon, logo app, ảnh,...
 
 ## IV. Mockups
 _Sử dụng Balsamiq Mockups 3.5.15_
