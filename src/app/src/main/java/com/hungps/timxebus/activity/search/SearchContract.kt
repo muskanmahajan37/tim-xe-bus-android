@@ -1,4 +1,4 @@
-package com.hungps.timxebus.activity.main
+package com.hungps.timxebus.activity.search
 
 import com.hungps.timxebus.basemvp.BaseMvpContract
 
@@ -6,13 +6,9 @@ import com.hungps.timxebus.basemvp.BaseMvpContract
  * Created by scit on 11/12/17.
  */
 
-interface MainContract {
+interface SearchContract {
 
     interface View : BaseMvpContract.View {
-
-        fun initViews()
-
-        fun initToolbar()
 
     }
 
