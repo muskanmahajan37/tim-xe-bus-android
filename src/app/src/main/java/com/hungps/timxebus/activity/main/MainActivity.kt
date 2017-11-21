@@ -23,81 +23,105 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(),
         MainContract.View, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var mDrawerToggle: ActionBarDrawerToggle
-
     override var mPresenter: MainContract.Presenter = MainPresenter()
 
-
+    lateinit var mDrawerToggle: ActionBarDrawerToggle
+    lateinit var mAdapter: RouteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initViews()
-
-
-        // Fake data
-        routeRecyclerView.setHasFixedSize(true)
-        routeRecyclerView.layoutManager = LinearLayoutManager(this)
-        routeRecyclerView.adapter = RouteAdapter(this, mutableListOf(
-                UserRoute("Test", "Test2", "Test3", mutableListOf()),
-                UserRoute("Test", "Test2", "Test3", mutableListOf()),
-                UserRoute("Test", "Test2", "Test3", mutableListOf()),
-                UserRoute("Test", "Test2", "Test3", mutableListOf()),
-                UserRoute("Test", "Test2", "Test3", mutableListOf())
-        ))
+        mPresenter.getNewData()
     }
 
 
 
     override fun initViews() {
+
         // Setup Toolbar
-        initToolbar()
-
-        // Listen to navigation drawer item click event
-        navigationView.setNavigationItemSelectedListener(this)
-
-        // Listen to button click event
-        searchButton.setOnClickListener(this)
-    }
-
-    override fun initToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
+        // Setup Drawer
         mDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
         mDrawerToggle.isDrawerIndicatorEnabled = true
-        drawerLayout.addDrawerListener(mDrawerToggle)
         mDrawerToggle.syncState()
+        drawerLayout.addDrawerListener(mDrawerToggle)
+
+
+        // Setup RecyclerView
+        routeRecyclerView.setHasFixedSize(true)
+        routeRecyclerView.layoutManager = LinearLayoutManager(this)
+
+
+        // Listen to events
+        navigationView.setNavigationItemSelectedListener(this)
+
+        searchButton.setOnClickListener(this)
+
     }
 
+
+
+    /**
+     * Setup RecyclerView's Adapter
+     */
+    override fun setupUserRouteAdapter(routes: MutableList<UserRoute>) {
+        mAdapter = RouteAdapter(this, routes)
+
+        routeRecyclerView.adapter = mAdapter
+    }
+
+
+
+    /**
+     * On View Clicked Event
+     */
     override fun onClick(view: View?) = when (view?.id) {
+
+        // On Search Button Clicked
         R.id.searchButton -> switchActivity(SearchActivity::class.java)
 
+        // Leave empty for default onclick event
         else -> {}
+
     }
 
+
+
+    /**
+     * On Navigation Item Clicked Event
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
 
-            R.id.navBookmark -> {  }
+            R.id.navBookmark -> { drawerLayout.closeDrawers(); return true }
 
             R.id.navSearch -> switchActivity(SearchActivity::class.java)
 
-            R.id.navAppInfo -> {  }
+            //TODO: Replace this class to the actual target class
+            R.id.navAppInfo -> switchActivity(MainActivity::class.java)
 
-            else -> return false
         }
 
-        return true
+        return false
+
     }
 
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        // Close Drawer when any drawer item clicked
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true
         }
 
         return super.onOptionsItemSelected(item)
+
     }
 
 }

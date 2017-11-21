@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 
-/**
- * Created by scit on 11/12/17.
- */
+/*
+* Author: scit
+* Time: 11/12/17
+*/
 
 abstract class BaseMvpActivity<in V : BaseMvpContract.View, T : BaseMvpContract.Presenter<V>> : AppCompatActivity(), BaseMvpContract.View  {
     protected abstract var mPresenter: T
@@ -16,6 +17,16 @@ abstract class BaseMvpActivity<in V : BaseMvpContract.View, T : BaseMvpContract.
         super.onCreate(savedInstanceState)
 
         mPresenter.attachView(this as V)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+        initViews()
+    }
+
+    override fun initViews() {
+        // For override
     }
 
     override fun showToast(message: String) {

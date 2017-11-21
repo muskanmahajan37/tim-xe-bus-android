@@ -10,6 +10,8 @@ interface BaseMvpContract {
 
     interface View {
 
+        fun initViews()
+
         fun showToast(message: String)
 
         fun switchActivity(targetClass: Class<*>)
