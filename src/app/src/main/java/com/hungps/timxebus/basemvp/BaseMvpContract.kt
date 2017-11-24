@@ -15,6 +15,9 @@ interface BaseMvpContract {
         fun showToast(message: String)
 
         fun switchActivity(targetClass: Class<*>)
+
+        fun openActivity(targetClass: Class<*>)
+
     }
 
     interface Presenter<in V : View> {

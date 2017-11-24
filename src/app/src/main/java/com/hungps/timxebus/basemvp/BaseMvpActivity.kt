@@ -35,5 +35,10 @@ abstract class BaseMvpActivity<in V : BaseMvpContract.View, T : BaseMvpContract.
 
     override fun switchActivity(targetClass: Class<*>) {
         startActivity(Intent(this, targetClass))
+        finish()
+    }
+
+    override fun openActivity(targetClass: Class<*>) {
+        startActivity(Intent(this, targetClass))
     }
 }

@@ -7,44 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- The main content view -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/lightGray"
-        tools:context=".activity.main.MainActivity">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical">
-
-            <include layout="@layout/layout_toolbar" />
-
-            <android.support.v7.widget.RecyclerView
-                android:paddingTop="6dp"
-                android:clipToPadding="false"
-                android:id="@+id/routeRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/searchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/ic_search"
-            app:fabSize="normal"
-            app:elevation="6dp"
-            android:backgroundTint="@color/colorPrimary"/>
-
-    </RelativeLayout>
+    <include layout="@layout/layout_list" />
 
     <!-- The navigation drawer -->
     <android.support.design.widget.NavigationView

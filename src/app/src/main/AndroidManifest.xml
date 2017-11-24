@@ -18,5 +18,9 @@
         <activity android:name=".activity.main.MainActivity" />
 
         <activity android:name=".activity.search.SearchActivity" />
+
+        <activity android:name=".activity.searchresult.SearchResultActivity" />
+
+        <activity android:name=".activity.appinfo.AppInfoActivity" />
     </application>
 </manifest>

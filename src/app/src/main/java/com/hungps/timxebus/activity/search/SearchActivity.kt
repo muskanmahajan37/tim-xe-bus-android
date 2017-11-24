@@ -3,7 +3,9 @@ package com.hungps.timxebus.activity.search
 import android.os.Bundle
 import android.view.MenuItem
 import com.hungps.timxebus.R
+import com.hungps.timxebus.activity.searchresult.SearchResultActivity
 import com.hungps.timxebus.basemvp.BaseMvpActivity
+import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 /**
@@ -20,6 +22,15 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Prese
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun initViews() {
+        super.initViews()
+
+        searchButton.setOnClickListener {
+            // TODO: Validate search form
+            switchActivity(SearchResultActivity::class.java)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

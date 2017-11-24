@@ -13,9 +13,8 @@
 ### 2. Màn hình chính (Tuyến đã lưu)
 - [x] Thanh tiêu đề hiển thị tên app, menu drawer
 - [x] Hiển thị danh sách các tuyến xe bus đã lưu
-	- [ ] Trượt một tuyến sang bên phải sẽ hiển thị nút **xóa**
-	- [ ] Ấn chọn xóa sẽ hiển thị dialog confirm
-- [ ] Nút tìm kiếm (tra cứu) xe bus
+	- [ ] Ấn giữ một tuyến sẽ hiện dialog confirm xóa
+- [x] Nút tìm kiếm (tra cứu) xe bus
 - [x] Sidebar gồm các  sub-menu sau
 	- [x] Tuyến đã lưu
 	- [x] Tra cứu
@@ -31,13 +30,13 @@
 - [ ] _\(Optional)_ hiển thị nút chuyển đổi giữa tra cứu bằng maps và bằng form nhập
 
 ### 4. Màn hình kết quả
-- [ ] Thanh tiêu đề hiển thị tên app, nút back
-- [ ] Hiển thị kết quả (các) lộ trình đi
-- [ ] Nút **Yêu thích**(Lưu/Đánh dấu)
+- [x] Thanh tiêu đề hiển thị tên app, nút back
+- [x] Hiển thị kết quả (các) lộ trình đi
+- [x] Nút **Yêu thích**(Lưu/Đánh dấu)
 - [ ] _\(Optional)_ Ấn vào một lộ trình sẽ hiển thị bản đồ trực quan
 
 ### 5. Màn hình thông tin ứng dụng
-- [ ] Hiển thị tên ứng dụng, phiên bản, tác giả
+- [x] Hiển thị tên ứng dụng, phiên bản, tác giả
 
 ## II. Chức năng
 - [ ] Tra cứu lộ trình đi (các) chuyến xe bus từ điểm đi và đến
@@ -50,10 +49,8 @@
 - [ ] Các model cần tạo:
 	- [x] Tuyến đường ( nhánh nhỏ của một lộ trình ): Mã, thành phố, điểm đi, điểm đến
 	- [x] Xe bus: Mã xe, Số xe, thành phố, lộ trình đi ( list các tuyến đường )
-	- [ ] Quản lí xe bus : list các xe bus
-	- [ ] Danh sách đánh dấu : list các xe bus
-- [ ] Các adapter cho: danh sách tuyến đường, danh sách kết quả, danh sách đã lưu
-- [ ] Class Util chứa các phương thức hay dùng
+- [ ] Các adapter cho: danh sách tuyến đường, danh sách đã lưu
+- [x] Class Util chứa các phương thức hay dùng
 - [x] Assets: icon, logo app, ảnh,...
 
 ## IV. Mockups
