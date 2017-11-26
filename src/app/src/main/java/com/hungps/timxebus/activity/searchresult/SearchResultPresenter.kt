@@ -1,7 +1,7 @@
 package com.hungps.timxebus.activity.searchresult
 
 import com.hungps.timxebus.basemvp.BaseMvpPresenter
-import com.hungps.timxebus.model.UserRoute
+import com.hungps.timxebus.model.Route
 
 /**
  * Created by scit on 11/12/17.
@@ -9,11 +9,13 @@ import com.hungps.timxebus.model.UserRoute
 
 class SearchResultPresenter() : BaseMvpPresenter<SearchResultContract.View>(), SearchResultContract.Presenter {
     var userRoutes = mutableListOf(
-            UserRoute("Test", "Test", "Test", mutableListOf()),
-            UserRoute("Test", "Test", "Test", mutableListOf()),
-            UserRoute("Test", "Test", "Test", mutableListOf()),
-            UserRoute("Test", "Test", "Test", mutableListOf()),
-            UserRoute("Test", "Test", "Test", mutableListOf())
+            Route("Test", mutableListOf()),
+            Route("Test", mutableListOf()),
+            Route("Test", mutableListOf()),
+            Route("Test", mutableListOf()),
+            Route("Test", mutableListOf()),
+            Route("Test", mutableListOf()),
+            Route("Test", mutableListOf())
     )
 
     override fun getNewData() {

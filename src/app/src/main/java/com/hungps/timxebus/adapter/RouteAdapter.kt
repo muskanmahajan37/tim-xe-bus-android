@@ -6,16 +6,17 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.hungps.timxebus.R
-import com.hungps.timxebus.model.UserRoute
+import com.hungps.timxebus.model.Route
 import com.hungps.timxebus.utils.inflate
 import com.hungps.timxebus.utils.setVisible
 import kotlinx.android.synthetic.main.row_tour_item.view.*
 
-/**
- * Created by scit on 11/12/17.
- */
+/*
+* Author: scit
+* Time: 11/12/17
+*/
 
-class RouteAdapter(val activity: Activity, val routes: MutableList<UserRoute>) : RecyclerView.Adapter<RouteAdapter.ViewHolder>() {
+class RouteAdapter(val activity: Activity, val routes: MutableList<Route>) : RecyclerView.Adapter<RouteAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflate(R.layout.row_tour_item))
 
@@ -27,10 +28,10 @@ class RouteAdapter(val activity: Activity, val routes: MutableList<UserRoute>) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        fun bind(route: UserRoute) = with(itemView) {
+        fun bind(route: Route) = with(itemView) {
             tenTextView.text = route.name
-            diemDiTextView.text = route.goFrom
-            diemDenTextView.text = route.goTo
+            diemDiTextView.text = route.name
+            diemDenTextView.text = route.name
 
             tourItemLayout.setOnClickListener(this@ViewHolder)
             favoriteButon.setOnClickListener(this@ViewHolder)

@@ -14,6 +14,8 @@ interface SearchContract {
 
     interface Presenter : BaseMvpContract.Presenter<View> {
 
+        fun searchRoutes(from: String, to: String)
+
     }
 
 }

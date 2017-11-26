@@ -23,6 +23,6 @@ class AppInfoActivity : BaseMvpActivity<AppInfoContract.View, AppInfoContract.Pr
         super.initViews()
 
         setSupportActionBar(toolbar)
-        supportActionBar.setShowH
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 }

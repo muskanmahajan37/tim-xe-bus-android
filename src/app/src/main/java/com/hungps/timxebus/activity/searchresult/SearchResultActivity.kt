@@ -1,8 +1,6 @@
 package com.hungps.timxebus.activity.searchresult
 
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
@@ -10,7 +8,7 @@ import com.hungps.timxebus.R
 import com.hungps.timxebus.activity.search.SearchActivity
 import com.hungps.timxebus.adapter.RouteAdapter
 import com.hungps.timxebus.basemvp.BaseMvpActivity
-import com.hungps.timxebus.model.UserRoute
+import com.hungps.timxebus.model.Route
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -56,7 +54,7 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
     /**
      * Setup RecyclerView's Adapter
      */
-    override fun setupUserRouteAdapter(routes: MutableList<UserRoute>) {
+    override fun setupUserRouteAdapter(routes: MutableList<Route>) {
         mAdapter = RouteAdapter(this, routes)
 
         routeRecyclerView.adapter = mAdapter
