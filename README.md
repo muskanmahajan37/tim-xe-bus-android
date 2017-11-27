@@ -46,10 +46,11 @@
 
 ## III. Cấu trúc ứng dụng 
 - Theo mô hình chuẩn MVP
-- [ ] Các model cần tạo:
-	- [x] Tuyến đường ( nhánh nhỏ của một lộ trình ): Mã, thành phố, điểm đi, điểm đến
-	- [x] Xe bus: Mã xe, Số xe, thành phố, lộ trình đi ( list các tuyến đường )
-- [ ] Các adapter cho: danh sách tuyến đường, danh sách đã lưu
+- [x] Các model cần tạo:
+	- [x] Tuyến đường
+	- [x] Lộ trình
+	- [x] Xe bus
+- [x] Các adapter cho: danh sách tuyến đường, danh sách đã lưu
 - [x] Class Util chứa các phương thức hay dùng
 - [x] Assets: icon, logo app, ảnh,...
 
