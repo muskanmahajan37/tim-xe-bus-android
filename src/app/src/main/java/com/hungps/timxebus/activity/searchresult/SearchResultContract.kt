@@ -1,6 +1,7 @@
 package com.hungps.timxebus.activity.searchresult
 
 import com.hungps.timxebus.basemvp.BaseMvpContract
+import com.hungps.timxebus.model.Block
 import com.hungps.timxebus.model.Route
 
 /**
@@ -17,7 +18,7 @@ interface SearchResultContract {
 
     interface Presenter : BaseMvpContract.Presenter<View> {
 
-        fun getNewData()
+        fun setupRecyckerView(routes: MutableList<Route>)
 
     }
 

@@ -1,7 +1,33 @@
 package com.hungps.timxebus.model
 
-/**
- * Created by scit on 11/12/17.
- */
+import android.os.Parcel
+import android.os.Parcelable
 
-class Bus(val id: String = "", val goFrom: String = "", val goTo: String = "")
+/*
+* Author: scit
+* Time: 11/12/17
+*/
+
+class Bus(val id: String = "", val goFrom: String = "", val goTo: String = ""): Parcelable {
+
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(goFrom)
+        parcel.writeString(goTo)
+    }
+
+    override fun describeContents() = 0
+
+    companion object CREATOR : Parcelable.Creator<Bus> {
+        override fun createFromParcel(parcel: Parcel) = Bus(parcel)
+
+        override fun newArray(size: Int): Array<Bus?> = arrayOfNulls(size)
+    }
+
+}

@@ -11,7 +11,7 @@ import com.hungps.timxebus.activity.appinfo.AppInfoActivity
 import com.hungps.timxebus.activity.search.SearchActivity
 import com.hungps.timxebus.adapter.RouteAdapter
 import com.hungps.timxebus.basemvp.BaseMvpActivity
-import com.hungps.timxebus.model.Route
+import com.hungps.timxebus.model.Block
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -69,10 +69,10 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     /**
      * Setup RecyclerView's Adapter
      */
-    override fun setupUserRouteAdapter(routes: MutableList<Route>) {
-        mAdapter = RouteAdapter(this, routes)
+    override fun setupUserRouteAdapter(routes: MutableList<Block>) {
+        //mAdapter = RouteAdapter(this, routes)
 
-        routeRecyclerView.adapter = mAdapter
+        //routeRecyclerView.adapter = mAdapter
     }
 
 

@@ -1,7 +1,7 @@
 package com.hungps.timxebus.activity.main
 
 import com.hungps.timxebus.basemvp.BaseMvpPresenter
-import com.hungps.timxebus.model.Route
+import com.hungps.timxebus.model.Block
 
 /**
  * Created by scit on 11/12/17.
@@ -9,13 +9,13 @@ import com.hungps.timxebus.model.Route
 
 class MainPresenter() : BaseMvpPresenter<MainContract.View>(), MainContract.Presenter {
     var Routes = mutableListOf(
-            Route("Test", emptyList()),
-            Route("Test", emptyList()),
-            Route("Test", emptyList()),
-            Route("Test", emptyList()),
-            Route("Test", emptyList()),
-            Route("Test", emptyList()),
-            Route("Test", emptyList())
+            Block("Test", emptyArray()),
+            Block("Test", emptyArray()),
+            Block("Test", emptyArray()),
+            Block("Test", emptyArray()),
+            Block("Test", emptyArray()),
+            Block("Test", emptyArray()),
+            Block("Test", emptyArray())
     )
 
     override fun getNewData() {

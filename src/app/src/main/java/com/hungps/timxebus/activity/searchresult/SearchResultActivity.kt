@@ -8,7 +8,9 @@ import com.hungps.timxebus.R
 import com.hungps.timxebus.activity.search.SearchActivity
 import com.hungps.timxebus.adapter.RouteAdapter
 import com.hungps.timxebus.basemvp.BaseMvpActivity
+import com.hungps.timxebus.model.Block
 import com.hungps.timxebus.model.Route
+import com.hungps.timxebus.utils.PASSED_ROUTE_DATA
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -28,7 +30,8 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_searchresult)
 
-        mPresenter.getNewData()
+        val data = intent.extras.getParcelableArrayList<Route>(PASSED_ROUTE_DATA)
+        mPresenter.setupRecyckerView(data)
     }
 
 

@@ -1,7 +1,7 @@
 package com.hungps.timxebus.activity.main
 
 import com.hungps.timxebus.basemvp.BaseMvpContract
-import com.hungps.timxebus.model.Route
+import com.hungps.timxebus.model.Block
 
 /*
 * Author: scit
@@ -12,7 +12,7 @@ interface MainContract {
 
     interface View : BaseMvpContract.View {
 
-        fun setupUserRouteAdapter(routes: MutableList<Route>)
+        fun setupUserRouteAdapter(routes: MutableList<Block>)
 
     }
 

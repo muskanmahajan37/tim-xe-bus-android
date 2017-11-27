@@ -1,31 +1,25 @@
 package com.hungps.timxebus.task
 
 import android.os.AsyncTask
-import android.util.Log
-import com.hungps.timxebus.model.Bus
-import com.hungps.timxebus.model.BusRoute
-import com.hungps.timxebus.model.Route
-import com.hungps.timxebus.model.WalkRoute
+import com.hungps.timxebus.model.*
 import com.hungps.timxebus.utils.forEachJsonArray
-import com.hungps.timxebus.utils.lastIndex
 import org.json.JSONArray
-import org.json.JSONObject
 import org.jsoup.Jsoup
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.util.regex.Pattern
 
-
 /*
 * Author: scit
 * Time: 11/24/17
 */
-class GetRoutesTask: AsyncTask<String, Void, MutableList<MutableList<Route>>>() {
 
-    override fun doInBackground(vararg args: String?): MutableList<MutableList<Route>> {
+class GetRoutesTask(val listener: OnFinishedGettingRoutes): AsyncTask<String, Void, MutableList<Route>>() {
+
+    override fun doInBackground(vararg args: String?): MutableList<Route> {
         val from = args[0]
         val to = args[1]
-        val resultRoutes = mutableListOf<MutableList<Route>>()
+        val resultRoutes = mutableListOf<Route>()
 
         // Send a query to google maps and get all script tags in <head>
         val scriptTags = Jsoup.connect(getUrlQuery(from!!, to!!))
@@ -43,14 +37,15 @@ class GetRoutesTask: AsyncTask<String, Void, MutableList<MutableList<Route>>>() 
                     .getJSONArray(1)
 
             queryRoutes.forEachJsonArray { queryRoute ->
-                val routes = mutableListOf<Route>()
 
-                val blocks = queryRoute
+                val queryBlocks = queryRoute
                         .getJSONArray(1)
                         .getJSONArray(0)
                         .getJSONArray(1)
 
-                blocks.forEachJsonArray { block ->
+                val blocks = mutableListOf<Block>()
+
+                queryBlocks.forEachJsonArray { block ->
                     try {
                         val busInfo = block
                             .getJSONArray(0)
@@ -64,8 +59,8 @@ class GetRoutesTask: AsyncTask<String, Void, MutableList<MutableList<Route>>>() 
                         if (isWalk) {
                             val blockRouteDetail = block.getJSONArray(1)
 
-                            routes.add(WalkRoute(
-                                detail = List(
+                            blocks.add(WalkBlock(
+                                detail = Array(
                                     blockRouteDetail.length(),
                                     { i -> getWalkRouteDetail(blockRouteDetail.getJSONArray(i)
                                                 .getJSONArray(0)
@@ -77,12 +72,13 @@ class GetRoutesTask: AsyncTask<String, Void, MutableList<MutableList<Route>>>() 
                             val blockDetail = block.getJSONArray(0).getJSONArray(6)
                             val blockRouteDetail = blockDetail.getJSONArray(14)
 
-                            routes.add(BusRoute(
+                            blocks.add(BusBlock(
                                 bus = getBusFromBusInfo(busInfo),
                                 name = blockDetail.getString(0),
-                                detail = List(blockRouteDetail.length(), { i ->
-                                    blockRouteDetail.getJSONArray(i).getString(0)
-                                })
+                                detail = Array(
+                                        blockRouteDetail.length(),
+                                        { i -> blockRouteDetail.getJSONArray(i).getString(0) }
+                                )
                             ))
                         }
                     } catch (e: Exception) {
@@ -92,12 +88,18 @@ class GetRoutesTask: AsyncTask<String, Void, MutableList<MutableList<Route>>>() 
                     }
                 }
 
-                resultRoutes.add(routes)
+                resultRoutes.add(Route("", ArrayList(blocks)))
             }
         }
 
-        println()
+        //println()
         return resultRoutes
+    }
+
+    override fun onPostExecute(result: MutableList<Route>?) {
+        super.onPostExecute(result)
+
+        listener.onFinishedGettingRoutes(result ?: mutableListOf())
     }
 
     private fun getUrlQuery(from: String, to: String): String {
@@ -150,5 +152,9 @@ class GetRoutesTask: AsyncTask<String, Void, MutableList<MutableList<Route>>>() 
         }
 
         return result
+    }
+
+    interface OnFinishedGettingRoutes {
+        fun onFinishedGettingRoutes(routes: MutableList<Route>)
     }
 }

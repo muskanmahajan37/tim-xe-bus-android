@@ -9,9 +9,10 @@ import com.hungps.timxebus.basemvp.BaseMvpActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
-/**
- * Created by scit on 11/12/17.
- */
+/*
+* Author: scit
+* Time: 11/12/17
+*/
 
 class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Presenter>(),
         SearchContract.View, View.OnClickListener {
@@ -44,7 +45,10 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Prese
     override fun onClick(view: View?) = when (view?.id) {
 
         // On Search Button Clicked
-        R.id.searchButton -> mPresenter.searchRoutes(fromLocationEditText.text.toString(), toLocationEditText.text.toString())
+        R.id.searchButton -> mPresenter.searchRoutes(
+                fromLocationEditText.text.toString(),
+                toLocationEditText.text.toString()
+        )
 
         else -> {}
     }

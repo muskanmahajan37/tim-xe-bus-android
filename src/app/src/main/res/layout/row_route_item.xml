@@ -32,7 +32,7 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/tenTextView"
+                android:id="@+id/nameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -41,14 +41,14 @@
                 tools:text="Duong Di Hoc" />
 
             <TextView
-                android:id="@+id/diemDiTextView"
+                android:id="@+id/goFromTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 tools:text="Tu: XXXXXXXXXXXXXXXXX" />
 
             <TextView
-                android:id="@+id/diemDenTextView"
+                android:id="@+id/goToTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -91,27 +91,11 @@
         android:visibility="gone"
         android:background="@color/lightGray"/>
 
-    <LinearLayout
-        android:id="@+id/expandContentLayout"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/blockRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test" />
-
-    </LinearLayout>
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
 
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.hungps.timxebus.basemvp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 
@@ -41,4 +43,10 @@ abstract class BaseMvpActivity<in V : BaseMvpContract.View, T : BaseMvpContract.
     override fun openActivity(targetClass: Class<*>) {
         startActivity(Intent(this, targetClass))
     }
+
+    override fun openActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
+    override fun getActivity(): Activity = this
 }
