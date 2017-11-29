@@ -30,4 +30,7 @@ class BusBlock(val bus: Bus = Bus(), name: String, detail: Array<String>)
         override fun newArray(size: Int): Array<BusBlock?> = arrayOfNulls(size)
     }
 
+    override fun equals(other: Any?): Boolean {
+        return super.equals(other) && bus.equals((other as BusBlock).bus)
+    }
 }

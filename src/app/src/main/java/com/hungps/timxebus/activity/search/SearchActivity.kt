@@ -8,6 +8,9 @@ import com.hungps.timxebus.R
 import com.hungps.timxebus.basemvp.BaseMvpActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import android.app.ProgressDialog
+import com.hungps.timxebus.utils.setVisible
+
 
 /*
 * Author: scit
@@ -25,17 +28,18 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Prese
 
     }
 
+    override fun onDestroy() {
+        mPresenter.stopSearchTask()
+
+        super.onDestroy()
+    }
+
     override fun initViews() {
         super.initViews()
 
         // Setup Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-        // Setup City Spinner
-        citySpinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listOf("Hà Nội", "Hồ Chí Minh"))
-        citySpinner.setSelection(0)
 
         // Listen to onclick event
         searchButton.setOnClickListener(this)
@@ -59,5 +63,10 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Prese
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showProgressDialog(show: Boolean) {
+        searchButton.setVisible(!show)
+        progressBar.setVisible(show)
     }
 }

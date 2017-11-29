@@ -65,21 +65,21 @@
                 android:id="@+id/favoriteButon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_star_border"
-                android:background="@null"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
+                android:background="@null"
+                android:src="@drawable/ic_star_border" />
 
             <ImageView
                 android:id="@+id/expandItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@null"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
-                android:src="@drawable/ic_keyboard_arrow_down"
-                android:background="@null"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"/>
+                android:src="@drawable/ic_keyboard_arrow_down" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -95,7 +95,6 @@
         android:id="@+id/blockRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"/>
+        android:visibility="gone"/>
 
 </LinearLayout>

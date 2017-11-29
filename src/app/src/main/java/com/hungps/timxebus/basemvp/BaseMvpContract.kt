@@ -23,6 +23,8 @@ interface BaseMvpContract {
         fun openActivity(intent: Intent)
 
         fun getActivity(): Activity
+
+        fun isNetworkConnected(): Boolean
     }
 
     interface Presenter<in V : View> {

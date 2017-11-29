@@ -25,33 +25,34 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thành Phố" />
-
-            <Spinner
-                android:id="@+id/citySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:labelFor="@id/fromLocationEditText"
                 android:text="Điểm đầu" />
 
             <EditText
+                android:hint="ben xe my dinh"
                 android:id="@+id/fromLocationEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/lightGray"
+                android:padding="8dp"
+                android:elevation="-1dp"
+                android:layout_marginBottom="8dp"/>
 
             <TextView
+                android:labelFor="@id/toLocationEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Điểm cuối" />
 
             <EditText
+                android:hint="linh nam"
                 android:id="@+id/toLocationEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/lightGray"
+                android:padding="8dp"
+                android:elevation="-1dp"
+                android:layout_marginBottom="8dp"/>
 
             <Button
                 android:id="@+id/searchButton"
@@ -62,7 +63,17 @@
                 android:background="@drawable/shape_button_primary"
                 android:textColor="@color/white"/>
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:indeterminateTint="@color/darkGray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+
         </LinearLayout>
 
     </RelativeLayout>
+
+
 </LinearLayout>

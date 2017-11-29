@@ -1,25 +1,25 @@
 package com.hungps.timxebus.activity.main
 
+import android.app.Activity
 import com.hungps.timxebus.basemvp.BaseMvpPresenter
+import com.hungps.timxebus.db.DbHelper
 import com.hungps.timxebus.model.Block
+import com.hungps.timxebus.model.Route
 
-/**
- * Created by scit on 11/12/17.
- */
+/*
+* Author: scit
+* Time: 11/12/17
+*/
 
 class MainPresenter() : BaseMvpPresenter<MainContract.View>(), MainContract.Presenter {
-    var Routes = mutableListOf(
-            Block("Test", emptyArray()),
-            Block("Test", emptyArray()),
-            Block("Test", emptyArray()),
-            Block("Test", emptyArray()),
-            Block("Test", emptyArray()),
-            Block("Test", emptyArray()),
-            Block("Test", emptyArray())
-    )
 
-    override fun getNewData() {
-        mView?.setupUserRouteAdapter(Routes)
+    lateinit var mRoutes: MutableList<Route>
+    lateinit var mDbHelper: DbHelper
+
+    override fun getFavoriteRoutes(activity: Activity) {
+        mDbHelper = DbHelper(activity)
+        mRoutes = mDbHelper.favoriteRoutes
+        mView?.setupUserRouteAdapter(mRoutes)
     }
 
 }

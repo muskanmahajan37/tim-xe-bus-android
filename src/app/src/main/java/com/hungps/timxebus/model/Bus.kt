@@ -30,4 +30,8 @@ class Bus(val id: String = "", val goFrom: String = "", val goTo: String = ""): 
         override fun newArray(size: Int): Array<Bus?> = arrayOfNulls(size)
     }
 
+    override fun equals(other: Any?): Boolean {
+        val otherOne = other as Bus
+        return id.equals(otherOne.id) && goFrom.equals(otherOne.goFrom) && goTo.equals(otherOne.goTo)
+    }
 }

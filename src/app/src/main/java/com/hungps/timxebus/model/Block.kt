@@ -27,4 +27,9 @@ open class Block(val name: String, val detail: Array<String>): Parcelable {
         override fun newArray(size: Int): Array<Block?> = arrayOfNulls(size)
     }
 
+    override fun equals(other: Any?): Boolean {
+        val otherOne = other as Block
+
+        return name.equals(otherOne.name) && detail contentDeepEquals otherOne.detail
+    }
 }

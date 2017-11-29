@@ -14,92 +14,93 @@ import java.util.regex.Pattern
 * Time: 11/24/17
 */
 
-class GetRoutesTask(val listener: OnFinishedGettingRoutes): AsyncTask<String, Void, MutableList<Route>>() {
+class GetRoutesTask(val mListener: OnFinishedGettingRoutes): AsyncTask<String, Void, MutableList<Route>>() {
 
     override fun doInBackground(vararg args: String?): MutableList<Route> {
-        val from = args[0]
-        val to = args[1]
         val resultRoutes = mutableListOf<Route>()
 
-        // Send a query to google maps and get all script tags in <head>
-        val scriptTags = Jsoup.connect(getUrlQuery(from!!, to!!))
-                .get().head()
-                .getElementsByTag("script")
+        try {
+            val from = args[0]
+            val to = args[1]
 
-        // The data is in the script tag number 7, so if there is no script at position 7, stop the task
-        if (scriptTags.size < 7) return mutableListOf()
+            // Send a query to google maps and get all script tags in <head>
+            val scriptTags = Jsoup.connect(getUrlQuery(from!!, to!!))
+                    .get().head()
+                    .getElementsByTag("script")
 
-        val queryData = getDataFromScriptTag(scriptTags[7].html())
-        if (queryData != null) {
-            // Get All Routes
-            val queryRoutes = queryData
-                    .getJSONArray(0)
-                    .getJSONArray(1)
-
-            queryRoutes.forEachJsonArray { queryRoute ->
-
-                val queryBlocks = queryRoute
-                        .getJSONArray(1)
+            val queryData = getDataFromScriptTag(scriptTags[7].html())
+            if (queryData != null) {
+                // Get All Routes
+                val queryRoutes = queryData
                         .getJSONArray(0)
                         .getJSONArray(1)
 
-                val blocks = mutableListOf<Block>()
+                queryRoutes.forEachJsonArray { queryRoute ->
+                        val queryBlocks = queryRoute
+                                .getJSONArray(1)
+                                .getJSONArray(0)
+                                .getJSONArray(1)
 
-                queryBlocks.forEachJsonArray { block ->
-                    try {
-                        val busInfo = block
-                            .getJSONArray(0)
-                            .getJSONArray(14)
-                            .getJSONArray(1)
-                            .getJSONArray(1)
-                            .getString(0)
+                        val blocks = mutableListOf<Block>()
 
-                        val isWalk = busInfo.toLowerCase() in arrayOf("đi bộ", "walk")
+                        queryBlocks.forEachJsonArray { block ->
+                            val busInfo = block
+                                    .getJSONArray(0)
+                                    .getJSONArray(14)
+                                    .getJSONArray(1)
+                                    .getJSONArray(1)
+                                    .getString(0)
 
-                        if (isWalk) {
-                            val blockRouteDetail = block.getJSONArray(1)
+                            val isWalk = busInfo.toLowerCase() in arrayOf("đi bộ", "walk")
 
-                            blocks.add(WalkBlock(
-                                detail = Array(
-                                    blockRouteDetail.length(),
-                                    { i -> getWalkRouteDetail(blockRouteDetail.getJSONArray(i)
-                                                .getJSONArray(0)
-                                                .getJSONArray(14)
-                                    )}
-                                )
-                            ))
-                        } else {
-                            val blockDetail = block.getJSONArray(0).getJSONArray(6)
-                            val blockRouteDetail = blockDetail.getJSONArray(14)
+                            if (isWalk) {
+                                val blockRouteDetail = block.getJSONArray(1)
 
-                            blocks.add(BusBlock(
-                                bus = getBusFromBusInfo(busInfo),
-                                name = blockDetail.getString(0),
-                                detail = Array(
-                                        blockRouteDetail.length(),
-                                        { i -> blockRouteDetail.getJSONArray(i).getString(0) }
-                                )
-                            ))
+                                blocks.add(WalkBlock(
+                                        detail = Array(
+                                                blockRouteDetail.length(),
+                                                { i ->
+                                                    getWalkRouteDetail(blockRouteDetail.getJSONArray(i)
+                                                            .getJSONArray(0)
+                                                            .getJSONArray(14)
+                                                    )
+                                                }
+                                        )
+                                ))
+                            } else {
+                                val blockDetail = block.getJSONArray(0).getJSONArray(6)
+                                val blockRouteDetail = blockDetail.getJSONArray(14)
+
+                                blocks.add(BusBlock(
+                                        bus = getBusFromBusInfo(busInfo),
+                                        name = blockDetail.getString(0),
+                                        detail = Array(
+                                                blockRouteDetail.length(),
+                                                { i -> blockRouteDetail.getJSONArray(i).getString(0) }
+                                        )
+                                ))
+                            }
                         }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    } finally {
-                        // Just for continue the loop
-                    }
+
+                        resultRoutes.add(Route("", ArrayList(blocks)))
                 }
-
-                resultRoutes.add(Route("", ArrayList(blocks)))
             }
+        } catch (e: Exception) {
+            onError(e)
+        } finally {
+            return resultRoutes
         }
-
-        //println()
-        return resultRoutes
     }
 
     override fun onPostExecute(result: MutableList<Route>?) {
         super.onPostExecute(result)
 
-        listener.onFinishedGettingRoutes(result ?: mutableListOf())
+        mListener.onFinishedGettingRoutes(result ?: mutableListOf())
+    }
+
+    fun onError(e: Exception) {
+        e.printStackTrace()
+        mListener.onErrorGettingRoutes(e)
     }
 
     private fun getUrlQuery(from: String, to: String): String {
@@ -156,5 +157,7 @@ class GetRoutesTask(val listener: OnFinishedGettingRoutes): AsyncTask<String, Vo
 
     interface OnFinishedGettingRoutes {
         fun onFinishedGettingRoutes(routes: MutableList<Route>)
+
+        fun onErrorGettingRoutes(e: Exception)
     }
 }

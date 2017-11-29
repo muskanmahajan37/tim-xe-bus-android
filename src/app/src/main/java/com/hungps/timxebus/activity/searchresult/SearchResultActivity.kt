@@ -1,5 +1,6 @@
 package com.hungps.timxebus.activity.searchresult
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
@@ -8,7 +9,7 @@ import com.hungps.timxebus.R
 import com.hungps.timxebus.activity.search.SearchActivity
 import com.hungps.timxebus.adapter.RouteAdapter
 import com.hungps.timxebus.basemvp.BaseMvpActivity
-import com.hungps.timxebus.model.Block
+import com.hungps.timxebus.db.DbHelper
 import com.hungps.timxebus.model.Route
 import com.hungps.timxebus.utils.PASSED_ROUTE_DATA
 import kotlinx.android.synthetic.main.layout_list.*
@@ -31,7 +32,7 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
         setContentView(R.layout.activity_searchresult)
 
         val data = intent.extras.getParcelableArrayList<Route>(PASSED_ROUTE_DATA)
-        mPresenter.setupRecyckerView(data)
+        mPresenter.setupRecyclerView(this as Context, data)
     }
 
 
@@ -57,8 +58,9 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
     /**
      * Setup RecyclerView's Adapter
      */
-    override fun setupUserRouteAdapter(routes: MutableList<Route>) {
-        mAdapter = RouteAdapter(this, routes)
+    override fun setupUserRouteAdapter(routes: MutableList<Route>, dbHelper: DbHelper) {
+        mAdapter = RouteAdapter(this, routes, dbHelper)
+        mAdapter.setOnItemClickListener(mPresenter)
 
         routeRecyclerView.adapter = mAdapter
     }

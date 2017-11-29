@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.hungps.timxebus.utils.isNetworkConnected
 
 /*
 * Author: scit
@@ -49,4 +50,6 @@ abstract class BaseMvpActivity<in V : BaseMvpContract.View, T : BaseMvpContract.
     }
 
     override fun getActivity(): Activity = this
+
+    override fun isNetworkConnected() = isNetworkConnected(this)
 }

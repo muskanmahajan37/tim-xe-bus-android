@@ -1,17 +1,26 @@
 package com.hungps.timxebus.utils
 
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import org.json.JSONArray
 import org.json.JSONObject
+import android.net.NetworkInfo
+import android.content.Context.CONNECTIVITY_SERVICE
+import android.net.ConnectivityManager
+import android.support.v4.content.ContextCompat
+import android.widget.ImageView
+import com.hungps.timxebus.model.Block
+import com.hungps.timxebus.model.Route
 
 
-
-/**
- * Created by scit on 11/12/17.
- */
+/*
+* Author: scit
+* Time: 11/12/17
+*/
 
 fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
@@ -19,6 +28,10 @@ fun ViewGroup.inflate(layoutRes: Int): View {
 
 fun View.setVisible(visible: Boolean) {
     this.visibility = if (visible) View.VISIBLE else View.GONE
+}
+
+fun ImageView.setIconDrawable(activity: Activity, iconDrawable: Int) {
+    this.setImageDrawable(ContextCompat.getDrawable(activity, iconDrawable))
 }
 
 val View.isVisible: Boolean
@@ -31,29 +44,33 @@ fun JSONArray.forEachJsonArray(action: (JSONArray) -> Unit): Unit {
     for (index in 0..this.lastIndex) action(this.getJSONArray(index))
 }
 
-val PASSED_ROUTE_DATA = "com.hungps.timxebus.utils.PASSED_ROUTE_DATA"
+fun isNetworkConnected(context: Context): Boolean {
+    val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-fun ListView.setListViewHeightBasedOnItems() {
+    val activeNetwork = cm.activeNetworkInfo
+    return activeNetwork != null && activeNetwork.isConnectedOrConnecting
 
-    val listAdapter = adapter
-    if (listAdapter != null) {
-        val numberOfItems = listAdapter.count
-
-        // Get total height of all items.
-        var totalItemsHeight = 0
-        for (itemPos in 0 until numberOfItems) {
-            val item = listAdapter.getView(itemPos, null, this)
-            item.measure(0, 0)
-            totalItemsHeight += item.measuredHeight
-        }
-
-        // Get total height of all item dividers.
-        val totalDividersHeight = dividerHeight * (numberOfItems - 1)
-
-        // Set list height.
-        val params = layoutParams
-        params.height = totalItemsHeight + totalDividersHeight
-        layoutParams = params
-        requestLayout()
-    }
 }
+
+fun MutableList<Route>.containsRoute(anotherRoute: Route): Boolean {
+    this.forEach { currentRoute ->
+        if (currentRoute.equals(anotherRoute)) {
+            return true
+        }
+    }
+    return false
+}
+
+fun MutableList<Block>.equalsWith(anotherRoute: MutableList<Block>): Boolean {
+    if (this.size != anotherRoute.size) return false
+
+    for (i in 0..(this.size - 1)) {
+        if (!this[i].equals(anotherRoute[i])) {
+            return false
+        }
+    }
+
+    return true
+}
+
+val PASSED_ROUTE_DATA = "com.hungps.timxebus.utils.PASSED_ROUTE_DATA"

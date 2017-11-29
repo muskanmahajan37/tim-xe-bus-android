@@ -10,12 +10,15 @@ interface SearchContract {
 
     interface View : BaseMvpContract.View {
 
+        fun showProgressDialog(show: Boolean)
+
     }
 
     interface Presenter : BaseMvpContract.Presenter<View> {
 
         fun searchRoutes(from: String, to: String)
 
+        fun stopSearchTask()
     }
 
 }
