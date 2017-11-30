@@ -14,7 +14,9 @@ import android.net.ConnectivityManager
 import android.support.v4.content.ContextCompat
 import android.widget.ImageView
 import com.hungps.timxebus.model.Block
+import com.hungps.timxebus.model.BusBlock
 import com.hungps.timxebus.model.Route
+import com.hungps.timxebus.model.WalkBlock
 
 
 /*
@@ -27,7 +29,12 @@ fun ViewGroup.inflate(layoutRes: Int): View {
 }
 
 fun View.setVisible(visible: Boolean) {
-    this.visibility = if (visible) View.VISIBLE else View.GONE
+    //this.visibility = if (visible) View.VISIBLE else View.GONE
+    if (visible) {
+        this.expand()
+    } else {
+        this.collapse()
+    }
 }
 
 fun ImageView.setIconDrawable(activity: Activity, iconDrawable: Int) {
@@ -65,7 +72,11 @@ fun MutableList<Block>.equalsWith(anotherRoute: MutableList<Block>): Boolean {
     if (this.size != anotherRoute.size) return false
 
     for (i in 0..(this.size - 1)) {
-        if (!this[i].equals(anotherRoute[i])) {
+        if (
+            (this[i] is BusBlock && anotherRoute[i] is WalkBlock)
+            || (this[i] is WalkBlock && anotherRoute[i] is BusBlock)
+            || !this[i].equals(anotherRoute[i])
+        ) {
             return false
         }
     }

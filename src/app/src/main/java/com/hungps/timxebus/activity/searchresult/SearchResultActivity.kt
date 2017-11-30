@@ -42,7 +42,7 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
         // Setup Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        supportActionBar?.title = "Kết Quả Tìm Kiếm"
 
         // Setup RecyclerView
         routeRecyclerView.setHasFixedSize(true)

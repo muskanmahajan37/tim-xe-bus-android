@@ -45,14 +45,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                tools:text="Tu: XXXXXXXXXXXXXXXXX" />
+                tools:text="Tu: XXXXXXXXXXXXXXXXX"
+                android:maxLines="1"
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/goToTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                tools:text="Den: XXXXXXXXXXXXXXXXX" />
+                tools:text="Den: XXXXXXXXXXXXXXXXX"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
         </LinearLayout>
 

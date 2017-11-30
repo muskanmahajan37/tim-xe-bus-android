@@ -27,8 +27,14 @@ class SearchResultPresenter() : BaseMvpPresenter<SearchResultContract.View>(),
     override fun onItemFavoriteClicked(position: Int) {
         if (mDbHelper.favoriteRoutes.contains(mRoutes[position])) {
             mDbHelper.removeRoute(mRoutes[position])
+            mView?.showToast("Đã xóa khỏi danh sách yêu thích")
         } else {
             mDbHelper.addRoute(mRoutes[position])
+            mView?.showToast("Đã thêm vào danh sách yêu thích")
         }
+    }
+
+    override fun onRemoveItem(position: Int) {
+        // For MainActivity only
     }
 }

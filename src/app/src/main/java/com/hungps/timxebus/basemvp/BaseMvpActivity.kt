@@ -14,7 +14,9 @@ import com.hungps.timxebus.utils.isNetworkConnected
 */
 
 abstract class BaseMvpActivity<in V : BaseMvpContract.View, T : BaseMvpContract.Presenter<V>> : AppCompatActivity(), BaseMvpContract.View  {
+
     protected abstract var mPresenter: T
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,34 +24,57 @@ abstract class BaseMvpActivity<in V : BaseMvpContract.View, T : BaseMvpContract.
         mPresenter.attachView(this as V)
     }
 
+
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
         initViews()
     }
 
+
+
     override fun initViews() {
         // For override
     }
 
+
+
     override fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+
 
     override fun switchActivity(targetClass: Class<*>) {
         startActivity(Intent(this, targetClass))
         finish()
     }
 
+
+
     override fun openActivity(targetClass: Class<*>) {
         startActivity(Intent(this, targetClass))
     }
+
+
 
     override fun openActivity(intent: Intent) {
         startActivity(intent)
     }
 
+
+
+    override fun closeThisActivity() {
+        finish()
+    }
+
+
+
     override fun getActivity(): Activity = this
 
+
+
     override fun isNetworkConnected() = isNetworkConnected(this)
+
 }

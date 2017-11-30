@@ -19,7 +19,7 @@ interface SearchResultContract {
 
     }
 
-    interface Presenter : BaseMvpContract.Presenter<View>, RouteAdapter.OnRouteListChange  {
+    interface Presenter : BaseMvpContract.Presenter<View>, RouteAdapter.OnRouteListChange {
 
         fun setupRecyclerView(context: Context, routes: MutableList<Route>)
 

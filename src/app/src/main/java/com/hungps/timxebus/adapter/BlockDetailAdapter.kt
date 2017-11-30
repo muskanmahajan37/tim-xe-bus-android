@@ -17,15 +17,15 @@ import com.hungps.timxebus.utils.inflate
 class BlockDetailAdapter(val detail: Array<String>): BaseAdapter() {
 
     override fun getView(index: Int, view: View?, parent: ViewGroup): View {
-        var inflatView = view
+        var inflateView = view
 
-        if (inflatView === null) {
-            inflatView = parent.inflate(R.layout.row_blockdetail_item)
+        if (inflateView === null) {
+            inflateView = parent.inflate(R.layout.row_blockdetail_item)
         }
 
-        inflatView.findViewById<TextView>(android.R.id.text1).setText(detail[index])
+        inflateView.findViewById<TextView>(android.R.id.text1).setText(detail[index])
 
-        return inflatView
+        return inflateView
     }
 
     override fun getItem(index: Int) = detail[index]

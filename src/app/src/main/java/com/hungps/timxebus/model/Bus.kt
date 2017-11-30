@@ -34,4 +34,8 @@ class Bus(val id: String = "", val goFrom: String = "", val goTo: String = ""): 
         val otherOne = other as Bus
         return id.equals(otherOne.id) && goFrom.equals(otherOne.goFrom) && goTo.equals(otherOne.goTo)
     }
+
+    override fun toString(): String {
+        return "Tuyến ${id} - ${goFrom} đi ${goTo}"
+    }
 }

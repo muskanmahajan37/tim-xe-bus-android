@@ -32,6 +32,6 @@ data class Route(val name: String = "", val blocks: MutableList<Block>): Parcela
 
     override fun equals(other: Any?): Boolean {
         val otherOne = other as Route
-        return name.equals(otherOne.name) && blocks.equalsWith(otherOne.blocks)
+        return blocks.equalsWith(otherOne.blocks)
     }
 }

@@ -19,6 +19,7 @@ interface SearchContract {
         fun searchRoutes(from: String, to: String)
 
         fun stopSearchTask()
+
     }
 
 }

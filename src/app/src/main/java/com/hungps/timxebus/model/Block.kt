@@ -8,13 +8,15 @@ import android.os.Parcelable
 * Time: 11/12/17
 */
 
-open class Block(val name: String, val detail: Array<String>): Parcelable {
+open class Block(val type: String, val name: String, val detail: Array<String>): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.createStringArray()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(type)
         parcel.writeString(name)
         parcel.writeStringArray(detail)
     }
@@ -30,6 +32,8 @@ open class Block(val name: String, val detail: Array<String>): Parcelable {
     override fun equals(other: Any?): Boolean {
         val otherOne = other as Block
 
-        return name.equals(otherOne.name) && detail contentDeepEquals otherOne.detail
+        return type.equals(other.type)
+                && name.equals(otherOne.name)
+                && detail contentDeepEquals otherOne.detail
     }
 }

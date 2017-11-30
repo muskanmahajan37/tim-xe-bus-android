@@ -20,26 +20,27 @@ import kotlinx.android.synthetic.main.row_block_item.view.*
 
 class BlockAdapter(val activity: Activity, val blocks: MutableList<Block>): RecyclerView.Adapter<BlockAdapter.ViewHolder>() {
 
+
     override fun getItemCount() = blocks.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int)
-            = holder.bind(blocks[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(blocks[position])
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             = ViewHolder(parent.inflate(R.layout.row_block_item))
 
 
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+            View.OnClickListener {
+
 
         fun bind(block: Block) = with(itemView) {
-
             blockNameTextView.text = block.name
             blockDetailListView.adapter = BlockDetailAdapter(block.detail)
 
             if (block is BusBlock) {
-                val bus = block.bus
-                busNameTextView.setText("Tuyến ${bus.id} - ${bus.goFrom} đi ${bus.goTo}")
+                busNameTextView.text = block.bus.toString()
             } else {
                 busNameTextView.setVisible(false)
             }
@@ -49,11 +50,12 @@ class BlockAdapter(val activity: Activity, val blocks: MutableList<Block>): Recy
             collapeImageView.setOnClickListener(this@ViewHolder)
         }
 
+
+
         override fun onClick(view: View?) = with(itemView) {
             val isShowDetail = !blockDetailListView.isVisible
 
             blockDetailListView.setVisible(isShowDetail)
-
             collapeImageView.setIconDrawable(
                     activity,
                     if (isShowDetail)

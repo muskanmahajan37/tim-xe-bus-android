@@ -9,17 +9,20 @@ import android.os.Parcelable
 */
 
 class BusBlock(val bus: Bus = Bus(), name: String, detail: Array<String>)
-    : Block(name, detail) {
+    : Block("bus", name, detail) {
 
     constructor(parcel: Parcel) : this(
             parcel.readParcelable(Bus::class.java.classLoader),
             parcel.readString(),
             parcel.createStringArray()
-    )
+    ) {
+        
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(bus, flags)
-        super.writeToParcel(parcel, flags)
+        parcel.writeString(name)
+        parcel.writeStringArray(detail)
     }
 
     override fun describeContents() = 0

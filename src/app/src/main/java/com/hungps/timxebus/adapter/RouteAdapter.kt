@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.hungps.timxebus.R
 import com.hungps.timxebus.db.DbHelper
+import com.hungps.timxebus.model.BusBlock
 import com.hungps.timxebus.model.Route
 import com.hungps.timxebus.utils.inflate
 import com.hungps.timxebus.utils.isVisible
@@ -21,34 +22,41 @@ import kotlinx.android.synthetic.main.row_route_item.view.*
 */
 
 class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val mDbHelper: DbHelper? = null) : RecyclerView.Adapter<RouteAdapter.ViewHolder>() {
+
     var mListener: OnRouteListChange? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            = ViewHolder(parent.inflate(R.layout.row_route_item))
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int)
-            = holder.bind(mRoutes[position])
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflate(R.layout.row_route_item))
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(mRoutes[position])
 
     override fun getItemCount() = mRoutes.size
 
 
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+            View.OnClickListener,
+            View.OnLongClickListener {
+
 
         fun bind(route: Route) = with(itemView) {
             // Set name
-            if (nameTextView.text.isEmpty()) {
+            if (route.name.isEmpty()) {
                 nameTextView.height = 0
             } else {
                 nameTextView.text = route.name
             }
 
             // Set go from/go to
-            if (route.blocks.size == 1) {
+            var allBusBlocks = route.blocks.filter { block -> block.type.equals("bus") }
+            if (allBusBlocks.size >= 2) {
+                goFromTextView.text = (allBusBlocks[0] as BusBlock).bus.toString()
+                goToTextView.text = (allBusBlocks[allBusBlocks.size - 1] as BusBlock).bus.toString()
+            } else {
                 goFromTextView.text = route.blocks[0].name
-            } else if (route.blocks.size > 2) {
-                goFromTextView.text = route.blocks[0].name
-                goToTextView.text = route.blocks[1].name
+                goToTextView.text = route.blocks[route.blocks.size - 1].name
             }
 
             // Set Detail
@@ -68,12 +76,14 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
 
             // Listen to click event
             tourItemLayout.setOnClickListener(this@ViewHolder)
+            tourItemLayout.setOnLongClickListener(this@ViewHolder)
             favoriteButon.setOnClickListener(this@ViewHolder)
         }
 
+
+
         override fun onClick(view: View?): Unit = with(itemView) {
             when (view?.id) {
-
                 // On click favorite an item
                 R.id.favoriteButon -> {
                     val newStarDrawable =
@@ -94,7 +104,7 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
 
                     //Show (or hide) block detail and the divider line
                     blockRecyclerView.setVisible(isShowDetail)
-                    divider.setVisible(!isShowDetail)
+                    divider.setVisible(isShowDetail)
 
                     expandItemButton.setIconDrawable(
                             mActivity,
@@ -107,13 +117,26 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
 
             }
         }
+
+
+
+        override fun onLongClick(view: View?):Boolean = with(itemView) {
+            mListener?.onRemoveItem(adapterPosition)
+            return true
+        }
     }
+
+
 
     fun setOnItemClickListener(listener: OnRouteListChange) {
         mListener = listener
     }
 
+
+
     interface OnRouteListChange {
         fun onItemFavoriteClicked(position: Int)
+
+        fun onRemoveItem(position: Int)
     }
 }

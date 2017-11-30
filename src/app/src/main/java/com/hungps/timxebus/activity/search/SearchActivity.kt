@@ -3,12 +3,10 @@ package com.hungps.timxebus.activity.search
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
 import com.hungps.timxebus.R
 import com.hungps.timxebus.basemvp.BaseMvpActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
-import android.app.ProgressDialog
 import com.hungps.timxebus.utils.setVisible
 
 
@@ -18,15 +16,20 @@ import com.hungps.timxebus.utils.setVisible
 */
 
 class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Presenter>(),
-        SearchContract.View, View.OnClickListener {
+        SearchContract.View,
+        View.OnClickListener {
+
 
     override var mPresenter: SearchContract.Presenter = SearchPresenter()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
     }
+
+
 
     override fun onDestroy() {
         mPresenter.stopSearchTask()
@@ -34,20 +37,21 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Prese
         super.onDestroy()
     }
 
-    override fun initViews() {
-        super.initViews()
 
+
+    override fun initViews() {
         // Setup Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Tìm Kiếm"
 
         // Listen to onclick event
         searchButton.setOnClickListener(this)
-
     }
 
-    override fun onClick(view: View?) = when (view?.id) {
 
+
+    override fun onClick(view: View?) = when (view?.id) {
         // On Search Button Clicked
         R.id.searchButton -> mPresenter.searchRoutes(
                 fromLocationEditText.text.toString(),
@@ -57,6 +61,8 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Prese
         else -> {}
     }
 
+
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> finish()
@@ -65,8 +71,11 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchContract.Prese
         return super.onOptionsItemSelected(item)
     }
 
+
+
     override fun showProgressDialog(show: Boolean) {
         searchButton.setVisible(!show)
         progressBar.setVisible(show)
     }
+
 }

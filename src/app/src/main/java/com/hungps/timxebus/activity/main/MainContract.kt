@@ -1,6 +1,7 @@
 package com.hungps.timxebus.activity.main
 
 import android.app.Activity
+import com.hungps.timxebus.adapter.RouteAdapter
 import com.hungps.timxebus.basemvp.BaseMvpContract
 import com.hungps.timxebus.model.Block
 import com.hungps.timxebus.model.Route
@@ -16,11 +17,17 @@ interface MainContract {
 
         fun setupUserRouteAdapter(routes: MutableList<Route>)
 
+        fun notifyItemRemoved(position: Int)
+
+        fun showEmptyText(isShow: Boolean)
+
     }
 
-    interface Presenter : BaseMvpContract.Presenter<View> {
+    interface Presenter : BaseMvpContract.Presenter<View>, RouteAdapter.OnRouteListChange {
 
         fun getFavoriteRoutes(activity: Activity)
+
+        fun setupDbHelper(activity: Activity)
 
     }
 
