@@ -9,7 +9,7 @@ import com.hungps.timxebus.utils.equalsWith
 * Time: 11/27/17
 */
 
-data class Route(val name: String = "", val blocks: MutableList<Block>): Parcelable {
+data class Route(var name: String = "", val blocks: MutableList<Block>): Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             arrayListOf<Block>().apply {

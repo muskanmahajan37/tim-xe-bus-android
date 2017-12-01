@@ -95,6 +95,13 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     }
 
 
+
+    override fun notifyItemChanged(position: Int) {
+        mAdapter.notifyItemChanged(position)
+    }
+
+
+
     override fun showEmptyText(isShow: Boolean) {
         emptyTextView.setVisible(isShow)
     }

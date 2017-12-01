@@ -6,14 +6,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.hungps.timxebus.R
+import com.hungps.timxebus.activity.main.MainActivity
 import com.hungps.timxebus.db.DbHelper
 import com.hungps.timxebus.model.BusBlock
 import com.hungps.timxebus.model.Route
-import com.hungps.timxebus.utils.inflate
-import com.hungps.timxebus.utils.isVisible
-import com.hungps.timxebus.utils.containsRoute
-import com.hungps.timxebus.utils.setIconDrawable
-import com.hungps.timxebus.utils.setVisible
+import com.hungps.timxebus.utils.*
 import kotlinx.android.synthetic.main.row_route_item.view.*
 
 /*
@@ -37,8 +34,7 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-            View.OnClickListener,
-            View.OnLongClickListener {
+            View.OnClickListener {
 
 
         fun bind(route: Route) = with(itemView) {
@@ -67,6 +63,7 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
             // Set Favorite star's status
             if (mDbHelper === null) {
                 favoriteButon.setVisible(false)
+                buttonWrapper.setVisible(true) //And show the button wrapper, too
             } else if (mDbHelper.favoriteRoutes.containsRoute(route)) {
                 favoriteButon.setIconDrawable(mActivity, R.drawable.ic_star)
                 favoriteButon.tag = R.drawable.ic_star
@@ -76,8 +73,12 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
 
             // Listen to click event
             tourItemLayout.setOnClickListener(this@ViewHolder)
-            tourItemLayout.setOnLongClickListener(this@ViewHolder)
             favoriteButon.setOnClickListener(this@ViewHolder)
+
+            if (mActivity is MainActivity) {
+                renameTextView.setOnClickListener(this@ViewHolder)
+                removeTextView.setOnClickListener(this@ViewHolder)
+            }
         }
 
 
@@ -100,11 +101,10 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
 
                 // On expand an item
                 R.id.tourItemLayout -> {
-                    val isShowDetail = !blockRecyclerView.isVisible
+                    val isShowDetail = !hiddenView.isVisible
 
-                    //Show (or hide) block detail and the divider line
-                    blockRecyclerView.setVisible(isShowDetail)
-                    divider.setVisible(isShowDetail)
+                    //Show (or hide) block detail
+                    hiddenView.setVisibleWithAnimation(isShowDetail)
 
                     expandItemButton.setIconDrawable(
                             mActivity,
@@ -115,14 +115,17 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
                     )
                 }
 
+
+                // On rename an item
+                R.id.renameTextView -> {
+                    mListener?.onRenameItem(adapterPosition)
+                }
+
+                // On remove an Item
+                R.id.removeTextView -> {
+                    mListener?.onRemoveItem(adapterPosition)
+                }
             }
-        }
-
-
-
-        override fun onLongClick(view: View?):Boolean = with(itemView) {
-            mListener?.onRemoveItem(adapterPosition)
-            return true
         }
     }
 
@@ -138,5 +141,7 @@ class RouteAdapter(val mActivity: Activity, val mRoutes: MutableList<Route>, val
         fun onItemFavoriteClicked(position: Int)
 
         fun onRemoveItem(position: Int)
+
+        fun onRenameItem(position: Int)
     }
 }

@@ -58,4 +58,11 @@ class DbHelper(val mContext: Context) {
         favoriteRoutes = newRoutes
     }
 
+    fun updateRoute(position: Int, route: Route) {
+        val newRoutes = favoriteRoutes.toMutableList()
+        newRoutes[position] = route
+
+        favoriteRoutes = newRoutes
+    }
+
 }

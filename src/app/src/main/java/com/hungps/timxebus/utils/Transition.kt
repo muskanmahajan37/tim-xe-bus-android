@@ -1,8 +1,5 @@
 package com.hungps.timxebus.utils
 
-import android.view.animation.DecelerateInterpolator
-import android.animation.ValueAnimator
-import android.opengl.ETC1.getHeight
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Transformation
@@ -38,7 +35,7 @@ fun View.expand() {
     }
 
     // 1dp/ms
-    a.duration = ((targetHeight / context.resources.displayMetrics.density) * 4).toLong() * 20
+    a.duration = ((targetHeight / context.resources.displayMetrics.density)).toLong()
     startAnimation(a)
 }
 
@@ -61,6 +58,6 @@ fun View.collapse() {
     }
 
     // 1dp/ms
-    a.duration = ((initialHeight / context.resources.displayMetrics.density) * 4).toLong()
+    a.duration = ((initialHeight / context.resources.displayMetrics.density)).toLong()
     startAnimation(a)
 }

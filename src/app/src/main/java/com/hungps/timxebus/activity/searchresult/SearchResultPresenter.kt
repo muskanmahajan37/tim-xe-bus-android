@@ -37,4 +37,8 @@ class SearchResultPresenter() : BaseMvpPresenter<SearchResultContract.View>(),
     override fun onRemoveItem(position: Int) {
         // For MainActivity only
     }
+
+    override fun onRenameItem(position: Int) {
+        // Leave empty
+    }
 }

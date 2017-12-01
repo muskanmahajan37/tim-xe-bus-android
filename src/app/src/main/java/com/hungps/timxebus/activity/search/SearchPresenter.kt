@@ -24,9 +24,7 @@ class SearchPresenter : BaseMvpPresenter<SearchContract.View>(),
     override fun searchRoutes(from: String, to: String) {
         if (!mView!!.isNetworkConnected()) {
             mView?.showToast("Không có kết nối internet!")
-        }
-
-        if (from.isEmpty() || to.isEmpty()) {
+        } else if (from.isEmpty() || to.isEmpty()) {
             mView?.showToast("Điểm đầu và điểm cuối không được để trống!")
             return
         }

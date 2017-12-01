@@ -5,6 +5,18 @@ import android.app.AlertDialog
 import com.hungps.timxebus.basemvp.BaseMvpPresenter
 import com.hungps.timxebus.db.DbHelper
 import com.hungps.timxebus.model.Route
+import android.content.DialogInterface
+import android.text.Editable
+import android.widget.EditText
+import android.widget.RelativeLayout
+import com.hungps.timxebus.utils.setMargins
+import android.widget.TextView
+import android.widget.TableLayout
+import android.view.ViewGroup
+import android.widget.FrameLayout
+
+
+
 
 
 
@@ -13,7 +25,8 @@ import com.hungps.timxebus.model.Route
 * Time: 11/12/17
 */
 
-class MainPresenter() : BaseMvpPresenter<MainContract.View>(), MainContract.Presenter {
+class MainPresenter : BaseMvpPresenter<MainContract.View>(), MainContract.Presenter {
+
     lateinit var mRoutes: MutableList<Route>
     lateinit var mDbHelper: DbHelper
 
@@ -36,14 +49,47 @@ class MainPresenter() : BaseMvpPresenter<MainContract.View>(), MainContract.Pres
         // Leave it empty
     }
 
+    override fun onRenameItem(position: Int) {
+        val params = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(52,0,52,0)
+
+        val nameEditText = EditText(mView!!.getActivity())
+        nameEditText.setText(mRoutes[position].name)
+        nameEditText.layoutParams = params
+
+        val container = FrameLayout(mView!!.getActivity())
+        container.addView(nameEditText)
+
+
+
+        AlertDialog.Builder(mView?.getActivity())
+                .setTitle("Đổi tên")
+                .setMessage("Nhập tên tuyến:")
+                .setView(container)
+                .setPositiveButton("Đổi", { _, _ ->
+                    var name = nameEditText.text.toString()
+                    if (name.isEmpty()) {
+                        name = "Tuyến chưa đặt tên"
+                    }
+
+                    mRoutes[position].name = name
+                    mDbHelper.updateRoute(position, mRoutes[position])
+                    mView?.showToast("Đổi tên thành công!")
+                    mView?.notifyItemChanged(position)
+                })
+                .setNegativeButton("Hủy", null)
+                .show()
+    }
 
 
     override fun onRemoveItem(position: Int) {
         AlertDialog.Builder(mView?.getActivity())
                 .setTitle("Xác nhận")
                 .setMessage("Bạn có muốn xóa không?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, { dialog, whichButton ->
+                .setPositiveButton("Có", { _, _ ->
                     mDbHelper.removeRoute(mRoutes[position])
                     mRoutes.remove(mRoutes[position])
 
@@ -51,7 +97,7 @@ class MainPresenter() : BaseMvpPresenter<MainContract.View>(), MainContract.Pres
                     mView?.showToast("Xóa thành công!")
                     mView?.showEmptyText(mRoutes.size == 0)
                 })
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton("Không", null)
                 .show()
     }
 

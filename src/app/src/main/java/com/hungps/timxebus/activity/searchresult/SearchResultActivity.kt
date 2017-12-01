@@ -27,6 +27,7 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
 
     lateinit var mAdapter: RouteAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_searchresult)

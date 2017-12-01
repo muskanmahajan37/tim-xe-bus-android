@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import com.hungps.timxebus.R
 import com.hungps.timxebus.model.Block
 import com.hungps.timxebus.model.BusBlock
-import com.hungps.timxebus.utils.inflate
-import com.hungps.timxebus.utils.isVisible
-import com.hungps.timxebus.utils.setIconDrawable
-import com.hungps.timxebus.utils.setVisible
+import com.hungps.timxebus.utils.*
 import kotlinx.android.synthetic.main.row_block_item.view.*
 
 /*

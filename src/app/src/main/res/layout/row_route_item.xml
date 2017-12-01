@@ -88,17 +88,54 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:visibility="gone"
-        android:background="@color/lightGray"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/blockRecyclerView"
+    <LinearLayout
+        android:id="@+id/hiddenView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:orientation="vertical">
+
+        <include layout="@layout/divider_horizontal" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/blockRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+
+        <include layout="@layout/divider_horizontal" />
+
+        <LinearLayout
+            android:id="@+id/buttonWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/renameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="ĐỔI TÊN"
+                android:textAlignment="center"/>
+
+            <include layout="@layout/divider_vertical" />
+
+            <TextView
+                android:id="@+id/removeTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="XÓA"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

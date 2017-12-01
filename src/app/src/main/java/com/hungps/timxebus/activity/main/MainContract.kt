@@ -21,6 +21,8 @@ interface MainContract {
 
         fun showEmptyText(isShow: Boolean)
 
+        fun notifyItemChanged(position: Int)
+
     }
 
     interface Presenter : BaseMvpContract.Presenter<View>, RouteAdapter.OnRouteListChange {

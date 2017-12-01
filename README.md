@@ -13,7 +13,8 @@
 ### 2. Màn hình chính (Tuyến đã lưu)
 - [x] Thanh tiêu đề hiển thị tên app, menu drawer
 - [x] Hiển thị danh sách các tuyến xe bus đã lưu
-	- [ ] Ấn giữ một tuyến sẽ hiện dialog confirm xóa
+	- [x] Ấn nút xóa sẽ có dialog confirm
+	- [x] Ấn nút đổi tên sẽ hiện dialog hiện ô nhập trên
 - [x] Nút tìm kiếm (tra cứu) xe bus
 - [x] Sidebar gồm các  sub-menu sau
 	- [x] Tuyến đã lưu
@@ -39,9 +40,10 @@
 - [x] Hiển thị tên ứng dụng, phiên bản, tác giả
 
 ## II. Chức năng
-- [ ] Tra cứu lộ trình đi (các) chuyến xe bus từ điểm đi và đến
-- [ ] Đánh dấu/lưu các lộ trình thường đi
-- [ ] Xóa các lộ trình đã lưu
+- [x] Tra cứu lộ trình đi (các) chuyến xe bus từ điểm đi và đến
+- [x] Đánh dấu/lưu các lộ trình thường đi
+- [x] Xóa các lộ trình đã lưu
+- [x] Đổi tên lộ trình đã lưu
 - [ ] _\(Optional)_ Xem lộ trình bằng bản đồ trực quan
 
 ## III. Cấu trúc ứng dụng 

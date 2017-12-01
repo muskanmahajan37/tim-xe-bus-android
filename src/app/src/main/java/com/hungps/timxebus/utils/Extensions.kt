@@ -29,11 +29,22 @@ fun ViewGroup.inflate(layoutRes: Int): View {
 }
 
 fun View.setVisible(visible: Boolean) {
-    //this.visibility = if (visible) View.VISIBLE else View.GONE
+    this.visibility = if (visible) View.VISIBLE else View.GONE
+}
+
+fun View.setVisibleWithAnimation(visible: Boolean) {
     if (visible) {
         this.expand()
     } else {
         this.collapse()
+    }
+}
+
+fun View.setMargins(margin: Int) {
+    if (layoutParams is ViewGroup.MarginLayoutParams) {
+        val p = layoutParams as ViewGroup.MarginLayoutParams
+        p.setMargins(margin, margin, margin, margin)
+        requestLayout()
     }
 }
 
