@@ -9,10 +9,10 @@
 
 ### 1. Màn hình khởi động (Splash Screen)
 - [x] Hiển thị logo
-
+- [x] Sau 3 giây chuyển sang màn hình chính
 ### 2. Màn hình chính (Tuyến đã lưu)
 - [x] Thanh tiêu đề hiển thị tên app, menu drawer
-- [x] Hiển thị danh sách các tuyến xe bus đã lưu
+- [x] Hiển thị danh sách các tuyến xe bus đã lưu, ấn vào sẽ hiển thị chi tiết thông tin tuyến
 	- [x] Ấn nút xóa sẽ có dialog confirm
 	- [x] Ấn nút đổi tên sẽ hiện dialog hiện ô nhập trên
 - [x] Nút tìm kiếm (tra cứu) xe bus
@@ -24,9 +24,8 @@
 ### 3. Màn hình tra cứu 
 - [x] Thanh tiêu đề hiển thị tên app, nút back
 - [x] Form nhỏ chính giữa
-	- [x] Ô nhập/chọn thành phố
-	- [x] Ô nhập/chọn điểm đi
-	- [x] Ô nhập/chọn điểm đến
+	- [x] Ô nhập điểm đi
+	- [x] Ô nhập điểm đến
 	- [x] Nút tìm kiếm
 - [ ] _\(Optional)_ hiển thị nút chuyển đổi giữa tra cứu bằng maps và bằng form nhập
 
@@ -37,6 +36,7 @@
 - [ ] _\(Optional)_ Ấn vào một lộ trình sẽ hiển thị bản đồ trực quan
 
 ### 5. Màn hình thông tin ứng dụng
+- [x] Thanh tiêu đề hiển thị tên app, nút back
 - [x] Hiển thị tên ứng dụng, phiên bản, tác giả
 
 ## II. Chức năng
@@ -47,12 +47,12 @@
 - [ ] _\(Optional)_ Xem lộ trình bằng bản đồ trực quan
 
 ## III. Cấu trúc ứng dụng 
-- Theo mô hình chuẩn MVP
+- Theo mô hình MVP
 - [x] Các model cần tạo:
-	- [x] Tuyến đường
-	- [x] Lộ trình
-	- [x] Xe bus
-- [x] Các adapter cho: danh sách tuyến đường, danh sách đã lưu
+	- [x] Route
+	- [x] Block, WalkBlock, BusBlock
+	- [x] Bus
+- [x] Các adapter cho: Route, Block, Block Detail
 - [x] Class Util chứa các phương thức hay dùng
 - [x] Assets: icon, logo app, ảnh,...
 
