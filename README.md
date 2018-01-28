@@ -1,4 +1,4 @@
-# Dự án I: Lập trình Android _(Updating)_
+# Dự án I: Lập trình Android
 
 - Tên dự án: Tìm Xe Bus
 - Ngôn ngữ: Kotlin
@@ -70,6 +70,3 @@ Link file save mockups: [here](mocks/mockups.bmpr)
 
 ## V. Prototype
 ![Prototype](mocks/prototype.png)
-
-## VI. Sản phẩm hoàn thiện
-_Coming soon_
